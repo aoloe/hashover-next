@@ -38,7 +38,7 @@
 		protected $adminPassword	= 'passwd';			// Login password to gain admin rights (case-sensitive)
 
 		// Primary settings
-		public $settingsJson		= null;				// Optional external setup file overriding this values
+		public $settingsJson		= '../settings.json';	// Optional external setup file overriding this values
 		public $language		= 'en';				// Language used for forms, buttons, links, and tooltips
 		public $theme			= 'default';			// Comment Cascading Style Sheet (CSS)
 		public $timezone		= 'America/Los_Angeles';	// Timezone
