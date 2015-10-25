@@ -52,15 +52,15 @@
 			$this->statistics = new Statistics ($mode);
 			$this->statistics->executionStart ();
 
-			// Instantiate settings class
-			$this->settings = new Settings ();
-
 			// Instantiate general setup class
 			$this->setup = new Setup (
 				$mode,
 				$page_url,
 				$page_title
 			);
+
+			// Instantiate settings class
+			$this->settings = $this->setup->getSettings();
 
 			// Instantiate cookies class
 			$this->cookies = new Cookies (

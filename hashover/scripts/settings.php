@@ -38,6 +38,7 @@
 		protected $adminPassword	= 'passwd';			// Login password to gain admin rights (case-sensitive)
 
 		// Primary settings
+		public $settingsJson		= null;				// Optional external setup file overriding this values
 		public $language		= 'en';				// Language used for forms, buttons, links, and tooltips
 		public $theme			= 'default';			// Comment Cascading Style Sheet (CSS)
 		public $timezone		= 'America/Los_Angeles';	// Timezone
@@ -110,8 +111,8 @@
 		public $isMobile		= false;
 
 		// Technical settings placeholders
-		public $rootDirectory;
-		public $httpDirectory;
+		public $rootDirectory		= null;
+		public $httpDirectory		= null;
 		public $cookieExpiration;
 		public $domain;
 
@@ -121,15 +122,23 @@
 			// Set timezone
 			date_default_timezone_set ($this->timezone);
 
+			if (isset($this->settingsJson)) {
+				$this->readSettingsJson ($this->settingsJson);
+			}
+
 			// Set encoding
 			mb_internal_encoding ('UTF-8');
 
 			// Get parent directory
-			$dirname = dirname (__DIR__);
+			$parent_directory = dirname (__DIR__);
 
 			// Technical settings
-			$this->rootDirectory	= $dirname;			// Root directory for script
-			$this->httpDirectory	= '/' . basename ($dirname);	// Root directory for HTTP
+			if (!isset($this->rootDirectory)) {
+				$this->rootDirectory	= $parent_directory;		// Root directory for script
+			}
+			if (!isset($this->httpDirectory)) {
+				$this->httpDirectory	= '/' . basename ($parent_directory);	// Root directory for HTTP
+			}
 			$this->cookieExpiration	= time () + 60 * 60 * 24 * 30;	// Cookie expiration date
 			$this->domain		= $_SERVER['HTTP_HOST'];	// Domain name for refer checking & notifications
 
@@ -139,6 +148,25 @@
 					// Adjust settings to accommodate
 					$this->isMobile = true;
 					$this->imageFormat = 'svg';
+				}
+			}
+		}
+
+		protected
+		function readSettingsJson ($pathSettingsJson) {
+			$settingsJson = null;
+			$path = realpath ($pathSettingsJson);
+			if ($path !== false) {
+				$settingsJson = json_decode (file_get_contents ($path), true);
+			} else {
+				exit ("The defined settings JSON file could not be found: ".$pathSettingsJson);
+			}
+			if (isset ($settingsJson)) {
+				foreach ($settingsJson as $key => $value) {
+					$setting = lcfirst(str_replace ('-', '', ucwords($key, '-')));
+					if (property_exists ($this, $setting)) {
+						$this->{$setting} = $value;
+					}
 				}
 			}
 		}
