@@ -1,0 +1,9 @@
+{
+    "notification-email": "ale@graphicslab.org",
+    "encryption-key": "OSH7KONCcaM0Y",
+    "admin-password": "admin",
+    "timezone": "Europe/Zurich",
+    "data-format": "xml",
+    "allows-passwords": false,
+    "http-directory": "/comments/hashover/"
+}
