@@ -77,7 +77,6 @@
 
 	// Instantiate HashOver class
 	$hashover = new HashOver ('api', !empty ($_GET['url']) ? $_GET['url'] : '');
-	$hashover->statistics->mode = 'javascript';
 
 	// Display error if the API is disabled
 	if ($hashover->setup->APIStatus ('latest') === 'disabled') {
@@ -142,9 +141,3 @@
 
 	if (!include ($hashover->settings->rootDirectory . '/scripts/widget-output.php')) {
 		exit ('document.write (\'<b>HashOver</b>: Error! File "widget-output.php" could not be included!\');');
-	}
-
-	// End statistics and add them as code comment
-	echo $hashover->statistics->executionEnd ();
-
-?>
