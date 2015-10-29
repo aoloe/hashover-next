@@ -186,7 +186,7 @@
 
 				// Set password
 				if (!empty ($_POST['password'])) {
-					$this->password = $this->setup->encryption->createHash (trim ($_POST['password'], " \r\n\t"));
+					$this->password = $_POST['password'], " \r\n\t");
 				}
 
 				// RIPEMD-160 hash used to indicate user login
@@ -207,7 +207,7 @@
 				// Set cookies
 				if (empty ($_POST['edit'])) {
 					// Generate encrypted string / decryption key from e-mail
-					$encryption_keys = $this->setup->encryption->encrypt ($this->email);
+					$encryption_keys = $this->email;
 
 					$this->cookies->set ('name', $this->name);
 					$this->cookies->set ('password', $this->password);
@@ -425,7 +425,7 @@
 
 			if (!empty ($_POST['file'])) {
 				$get_pass = $this->commentData->read ($_POST['file']);
-				$passwords_match = $this->setup->encryption->verifyHash ($this->editPassword, $get_pass['password']);
+				$passwords_match = $$this->editPassword, $get_pass['password'];
 
 				// Check if password matches the one in the file
 				if ($passwords_match === true or $this->setup->userIsAdmin === true) {
@@ -531,7 +531,7 @@
 			// Store e-mail if one is given
 			if ($this->setup->allowsEmails === true) {
 				if (!empty ($this->email)) {
-					$encryption_keys = $this->setup->encryption->encrypt ($this->email);
+					$encryption_keys = $this->email;
 					$this->writeComment['email'] = $encryption_keys['encrypted'];
 					$this->writeComment['encryption'] = $encryption_keys['keys'];
 					$this->writeComment['email_hash'] = md5 (strtolower ($this->email));
@@ -565,7 +565,7 @@
 			// Edit comment
 			if (!empty ($this->password) and !empty ($_POST['file'])) {
 				$edit_comment = $this->commentData->read ($_POST['file']);
-				$passwords_match = $this->setup->encryption->verifyHash ($this->editPassword, $edit_comment['password']);
+				$passwords_match = $this->editPassword, $edit_comment['password'];
 
 				// Check if password matches the one in the file
 				if ($passwords_match or $this->setup->userIsAdmin) {
@@ -660,7 +660,7 @@
 					$webmaster_reply = 'In reply to ' . $reply_name . ':' . "\r\n\r\n" . $reply_body . "\r\n\r\n";
 
 					if (!empty ($reply_comment['email']) and !empty ($reply_comment['encryption'])) {
-						$reply_email = $this->setup->encryption->decrypt ($reply_comment['email'], $reply_comment['encryption']);
+						$reply_email = $reply_comment['email'], $reply_comment['encryption'];
 
 						if ($reply_email !== $this->email
 						    and !empty ($reply_comment['notifications'])

@@ -33,11 +33,9 @@
 		public $mode;
 		public $pageURL;
 		public $pageTitle;
-		public $encryption;
 		public $userName = '';
 		public $userPassword = '';
 		public $userEmail = '';
-		public $userEncryption = '';
 		public $userWebsite = '';
 		public $userIsLoggedIn = false;
 		public $userIsAdmin = false;
@@ -89,9 +87,6 @@
 				$this->pageTitle = $page_title;
 			}
 
-			// Instantiate encryption class
-			$this->encryption = new Encryption ($this->encryptionKey);
-
 			// Strip escape slashes from POST, GET, and COOKIE data
 			if (get_magic_quotes_gpc ()) {
 				$_GET = array_map ('stripslashes', $_GET);
@@ -137,8 +132,7 @@
 			// Setup user e-mail via cookie
 			if (!empty ($_COOKIE['email'])) {
 				$encrypted_email = trim (html_entity_decode ($_COOKIE['email'], ENT_COMPAT, 'UTF-8'), " \r\n\t");
-				$encryption_keys = !empty ($_COOKIE['encryption']) ? $_COOKIE['encryption'] : '';
-				$decrypted_email = $this->encryption->decrypt ($encrypted_email, $encryption_keys);
+				$decrypted_email = $encrypted_email;
 
 				if (filter_var ($decrypted_email, FILTER_VALIDATE_EMAIL)) {
 					$this->userEmail = $decrypted_email;
@@ -157,7 +151,7 @@
 				// Check if user is logged in as admin
 				if ($this->userName === $this->adminName) {
 					$decoded_password = trim (html_entity_decode ($this->userPassword, ENT_COMPAT, 'UTF-8'), " \r\n\t");
-					$passwords_match = $this->encryption->verifyHash ($this->adminPassword, $decoded_password);
+					$passwords_match = $this->adminPassword);
 
 					if ($passwords_match === true) {
 						$this->userIsAdmin = true;
@@ -257,11 +251,6 @@
 			$settings = new Settings();
 			if (isset ($settings->settingsJson)) {
 				$settings->readSettingsJson ($settings->settingsJson);
-			}
-
-			// Exit if encryption key is set to the default
-			if ($settings->encryptionKey === '8CharKey') {
-				exit ($this->escapeOutput ('<b>HashOver</b>: You must use a UNIQUE encryption key in /hashover/scripts/settings.php', 'single'));
 			}
 
 			// Exit if notification email is set to the default
