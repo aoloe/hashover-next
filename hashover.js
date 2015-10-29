@@ -112,7 +112,7 @@
 	// Append HashOver JavaScript tag to the page body
 	var script = document.createElement ('script');
 	    script.type = 'text/javascript';
-	    script.src  = '/hashover' + scriptSrc;
+	    script.src  = '/comments/hashover' + scriptSrc;
 	    script.src += '?' + scriptQueries;
 	    script.src += '&' + 'hashover-script=' + scriptNumber;
 	    script.id = 'hashover-script-' + scriptNumber;

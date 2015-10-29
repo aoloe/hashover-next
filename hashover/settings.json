@@ -3,7 +3,7 @@
     "encryption-key": "OSH7KONCcaM0Y",
     "admin-password": "admin",
     "timezone": "Europe/Zurich",
-    "data-format": "json",
+    "data-format": "simplejson",
     "allows-passwords": false,
     "http-directory": "/comments/hashover/",
     "displays-title": false,
