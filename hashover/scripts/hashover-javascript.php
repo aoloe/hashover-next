@@ -1,23 +1,5 @@
 <?php
 
-
-	// Use UTF-8 character set
-	ini_set ('default_charset', 'UTF-8');
-
-	// Enable display of PHP errors
-	ini_set ('display_errors', true);
-	error_reporting (E_ALL);
-
-	// Tell browser output is JavaScript
-	header ('Content-Type: application/javascript');
-
-	// Disable browser cache
-	header ('Expires: Wed, 08 May 1991 12:00:00 GMT');
-	header ('Last-Modified: ' . gmdate ('D, d M Y H:i:s') . ' GMT');
-	header ('Cache-Control: no-store, no-cache, must-revalidate');
-	header ('Cache-Control: post-check=0, pre-check=0', false);
-	header ('Pragma: no-cache');
-
 	// Attempt to obtain URL via GET
 	if (!empty ($_GET['url'])) {
 		$page_url = $_GET['url'];
