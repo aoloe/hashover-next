@@ -6,3 +6,10 @@ It should work in a similar way as the PHP documentation currently works.
 Comments that have been copied over to the main content, will be set as closed / hidden.
 
 Using markdown in the comments will make it easier to integrate the submissions.
+
+## Code structure
+
+### Entry points:
+
+hashover/scripts/hashover-javascript.php
+
