@@ -1,33 +1,5 @@
 <?php
 
-	// Copyright (C) 2010-2015 Jacob Barkdull
-	//
-	//	This file is part of HashOver.
-	//
-	//	HashOver is free software: you can redistribute it and/or modify
-	//	it under the terms of the GNU Affero General Public License as
-	//	published by the Free Software Foundation, either version 3 of the
-	//	License, or (at your option) any later version.
-	//
-	//	HashOver is distributed in the hope that it will be useful,
-	//	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	//	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	//	GNU Affero General Public License for more details.
-	//
-	//	You should have received a copy of the GNU Affero General Public License
-	//	along with HashOver.  If not, see <http://www.gnu.org/licenses/>.
-
-
-	// Display source code
-	if (basename ($_SERVER['PHP_SELF']) === basename (__FILE__)) {
-		if (isset ($_GET['source'])) {
-			header ('Content-type: text/plain; charset=UTF-8');
-			exit (file_get_contents (basename (__FILE__)));
-		} else {
-			exit ('<b>HashOver</b>: This isn\'t a standalone file.');
-		}
-	}
-
 	// Text for "Show X Other Comment(s)" link
 	if ($hashover->settings->collapseLimit >= 1) {
 		$collapse_num_cmts = ($hashover->readComments->totalCount - 1) - $hashover->settings->collapseLimit;
@@ -45,23 +17,6 @@
 	$dislike_locale = $hashover->locales->locale ('dislike', true);
 
 ?>
-// Copyright (C) 2010-2015 Jacob Barkdull
-//
-//	This file is part of HashOver.
-//
-//	HashOver is free software: you can redistribute it and/or modify
-//	it under the terms of the GNU Affero General Public License as
-//	published by the Free Software Foundation, either version 3 of the
-//	License, or (at your option) any later version.
-//
-//	HashOver is distributed in the hope that it will be useful,
-//	but WITHOUT ANY WARRANTY; without even the implied warranty of
-//	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//	GNU Affero General Public License for more details.
-//
-//	You should have received a copy of the GNU Affero General Public License
-//	along with HashOver.  If not, see <http://www.gnu.org/licenses/>.
-
 
 (function () {
 	"use strict";
